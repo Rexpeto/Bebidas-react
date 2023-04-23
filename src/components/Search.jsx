@@ -32,11 +32,11 @@ const Search = () => {
 
     return (
         <form
-            className="flex gap-2 w-full justify-center"
+            className="flex flex-col-reverse md:flex-row gap-4 md:gap-2 w-full justify-center"
             onSubmit={handdlerSubmit}
         >
             <select
-                className=" border text-sm rounded-lg block px-3 bg-gray-800/50 backdrop-blur-xl border-gray-600 placeholder-gray-400 text-white focus:border-blue-500 outline-none transition duration-150"
+                className="border text-sm rounded-lg block p-3 md:px-2 bg-gray-800/50 backdrop-blur-xl border-gray-600 placeholder-gray-400 text-white focus:border-blue-500 outline-none transition duration-150"
                 name="category"
                 onChange={(e) =>
                     setSearch({
@@ -52,7 +52,7 @@ const Search = () => {
                     </option>
                 ))}
             </select>
-            <div className="relative w-[30rem]">
+            <div className="relative w-full md:w-[30rem]">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none z-[2]">
                     <RiSearchLine className="text-white" htmlFor="search" />
                 </div>
