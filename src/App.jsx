@@ -1,7 +1,9 @@
+import Hero from "./components/Hero";
+
 const App = () => {
     return (
         <>
-            <h1>Bebida</h1>
+            <Hero />
         </>
     );
 };
