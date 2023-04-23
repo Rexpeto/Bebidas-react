@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
 import useCategory from "../hooks/useCategory";
+import useDrinks from "../hooks/useDrinks";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,6 +15,9 @@ const Search = () => {
     //* State category
     const { category } = useCategory();
 
+    //* function getDrinks
+    const { getDrinks } = useDrinks();
+
     //* After submit
     const handdlerSubmit = (e) => {
         e.preventDefault();
@@ -22,6 +26,8 @@ const Search = () => {
             toast.warn("Todos los campos son obligatorios");
             return;
         }
+
+        getDrinks(search);
     };
 
     return (
