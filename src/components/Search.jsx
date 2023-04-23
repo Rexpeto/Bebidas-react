@@ -1,12 +1,44 @@
+import { useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
 import useCategory from "../hooks/useCategory";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Search = () => {
+    //* State search
+    const [search, setSearch] = useState({
+        name: "",
+        category: "",
+    });
+
+    //* State category
     const { category } = useCategory();
 
+    //* After submit
+    const handdlerSubmit = (e) => {
+        e.preventDefault();
+
+        if (Object.values(search).includes("")) {
+            toast.warn("Todos los campos son obligatorios");
+            return;
+        }
+    };
+
     return (
-        <form className="flex gap-2 w-full justify-center">
-            <select className=" border text-sm rounded-lg block px-3 bg-gray-800/50 backdrop-blur-xl border-gray-600 placeholder-gray-400 text-white focus:border-blue-500 outline-none transition duration-150">
+        <form
+            className="flex gap-2 w-full justify-center"
+            onSubmit={handdlerSubmit}
+        >
+            <select
+                className=" border text-sm rounded-lg block px-3 bg-gray-800/50 backdrop-blur-xl border-gray-600 placeholder-gray-400 text-white focus:border-blue-500 outline-none transition duration-150"
+                name="category"
+                onChange={(e) =>
+                    setSearch({
+                        ...search,
+                        [e.target.name]: e.target.value,
+                    })
+                }
+            >
                 <option value="">Categorías</option>
                 {category.map((item) => (
                     <option value={item?.strCategory} key={item?.strCategory}>
@@ -23,6 +55,13 @@ const Search = () => {
                     type="text"
                     className="block w-full p-4 pl-10 text-sm bg-gray-800/50 backdrop-blur-xl border-gray-800 border rounded-lg focus:border-blue-500 placeholder-gray-400 text-white outline-none transition duration-150"
                     placeholder="Buscar Bebida"
+                    name="name"
+                    onChange={(e) =>
+                        setSearch({
+                            ...search,
+                            [e.target.name]: e.target.value,
+                        })
+                    }
                 />
                 <button
                     type="submit"
