@@ -12,6 +12,9 @@ export const DrinksProvider = ({ children }) => {
     //* State modal
     const [modal, setModal] = useState(false);
 
+    //* State instructions
+    const [instructions, setInstructions] = useState({});
+
     //* Get drinks Api
     const getDrinks = async (obj) => {
         try {
@@ -30,13 +33,28 @@ export const DrinksProvider = ({ children }) => {
     //* Show modal
     const handdlerModalShow = () => {
         document.body.style.overflow = "auto";
+        setInstructions({});
         setModal(!modal);
     };
 
     //* Data from drinks to modal
-    const handdlerModal = (drinkId) => {
-        document.body.style.overflow = "hidden";
-        setModal(true);
+    const handdlerModal = async (drinkId) => {
+        try {
+            document.body.style.overflow = "hidden";
+
+            const {
+                data: { drinks },
+            } = await axios(
+                `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`
+            );
+
+            setInstructions(drinks[0]);
+
+            setModal(true);
+        } catch (error) {
+            document.body.style.overflow = "auto";
+            console.log(error);
+        }
     };
 
     return (
@@ -47,6 +65,7 @@ export const DrinksProvider = ({ children }) => {
                 modal,
                 handdlerModalShow,
                 handdlerModal,
+                instructions,
             }}
         >
             {modal && <Modal />}
