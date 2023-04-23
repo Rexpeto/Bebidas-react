@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
 import axios from "axios";
+import Modal from "../components/Modal";
 
 const DrinksContext = createContext();
 
 export const DrinksProvider = ({ children }) => {
     //* State drink
     const [result, setResult] = useState([]);
+
+    //* State modal
+    const [modal, setModal] = useState(false);
 
     //* Get drinks Api
     const getDrinks = async (obj) => {
@@ -23,13 +27,29 @@ export const DrinksProvider = ({ children }) => {
         }
     };
 
+    //* Show modal
+    const handdlerModalShow = () => {
+        document.body.style.overflow = "auto";
+        setModal(!modal);
+    };
+
+    //* Data from drinks to modal
+    const handdlerModal = (drinkId) => {
+        document.body.style.overflow = "hidden";
+        setModal(true);
+    };
+
     return (
         <DrinksContext.Provider
             value={{
                 getDrinks,
                 result,
+                modal,
+                handdlerModalShow,
+                handdlerModal,
             }}
         >
+            {modal && <Modal />}
             {children}
         </DrinksContext.Provider>
     );
