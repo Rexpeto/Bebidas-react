@@ -62,6 +62,7 @@ const Search = () => {
                     className="block w-full p-4 pl-10 text-sm bg-gray-800/50 backdrop-blur-xl border-gray-800 border rounded-lg focus:border-blue-500 placeholder-gray-400 text-white outline-none transition duration-150"
                     placeholder="Buscar Bebida"
                     name="name"
+                    autocomplete="off"
                     onChange={(e) =>
                         setSearch({
                             ...search,
