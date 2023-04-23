@@ -1,12 +1,15 @@
 import { CategoryProvider } from "./context/CategoryProvider";
+import { DrinksProvider } from "./context/DrinksProvider";
 import { ToastContainer } from "react-toastify";
 import Hero from "./components/Hero";
 
 const App = () => {
     return (
         <CategoryProvider>
-            <ToastContainer theme="dark" />
-            <Hero />
+            <DrinksProvider>
+                <ToastContainer theme="dark" />
+                <Hero />
+            </DrinksProvider>
         </CategoryProvider>
     );
 };
